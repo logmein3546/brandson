@@ -1,0 +1,312 @@
+/******************************* GENERAL STYLES ******************************/
+
+#sidebar {
+	background-color: #30363e;
+	color: white;
+	overflow: hidden;
+	position: absolute;
+	top: 40px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+/** accordion **/
+
+#sidebar #machine-accordion {
+	border-width: 0px;
+	height: 100%;
+}
+
+#sidebar #machine-accordion .panel-default {
+	border-width: 0px;
+	margin: 0px;
+	border-radius: 0px;
+}
+
+#sidebar #machine-accordion .panel-body {
+	background: url(/static/img/sidebar/sidebar-shadow.png) #30363e repeat-x;
+	color: white;
+	white-space: nowrap;
+	overflow-x: auto;
+	overflow-y: auto;
+	width: 100%;
+	border: none;
+	padding: 10px 0px;
+}
+
+#sidebar #machine-accordion .panel-heading {
+	color: #333;
+	background-color: #414954;
+	border-radius: 0px;
+	border-bottom: 1px solid #2f353d;
+	border-left: none;
+	border-right: none;
+	border-top: 1px solid #49525e;
+	padding: 0px;
+}
+
+#sidebar #machine-accordion .panel-title {
+	font-size: 16px;
+	text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+	font-family: proxima-nova, sans-serif;
+	font-weight: 400;
+	color: #efefef;
+}
+#sidebar #machine-accordion .panel-title a {
+	width: 100%;
+	cursor: pointer;
+	display: block;
+	padding: 10px 16px;
+}
+#sidebar #machine-accordion .panel-title a:hover {
+	text-decoration: none;
+}
+#sidebar #machine-accordion .panel.locked {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+/**** OPERATING SYSTEM MACHINE TYPES ****/
+
+#sidebar #machine-accordion .panel-title a.windows {
+	padding-left: 40px;
+	background: url(/static/img/sidebar/machine-windows.png) no-repeat 13px 50%;
+}
+
+#sidebar #machine-accordion .panel-title a.mac {
+	background: url(/static/img/sidebar/machine-windows.png) no-repeat;
+}
+
+#sidebar #machine-accordion .panel-title a.ubuntu {
+	background: url(/static/img/sidebar/machine-windows.png) no-repeat;
+}
+
+#sidebar #machine-accordion .panel-title a.linux {
+	background: url(/static/img/sidebar/machine-windows.png) no-repeat;
+}
+
+/********************************* TREE STYLES *******************************/
+
+#sidebar .child {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+#sidebar .row {
+	margin: 4px 0px;
+	margin-left: 22px;
+}
+
+#sidebar .nodeContainer {
+	display: block;
+}
+
+#sidebar .node {
+	display: inline-block;
+	background-repeat: no-repeat;
+	background: url(/static/img/arrow.png);
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+#sidebar .nodeExpanded {
+	background-position: left bottom;
+}
+
+#sidebar .nodeClosed {
+	background-position: left top;
+}
+
+#sidebar .nodeUnexpandable {
+	opacity: 0;
+	cursor: auto;
+}
+
+#sidebar .nodeText.folder {
+	padding-left: 30px;
+	background: url(/static/img/sidebar-folder.png) no-repeat;
+	background-position: 0px 1px;
+}
+
+#sidebar .nodeText.machine {
+	padding-left: 30px;
+	background-position: 0px 0px;
+}
+
+#sidebar .nodeText {
+	display: inline-block;
+	font-size: 16px;
+	text-shadow: 0px 0px 4px #000;
+	font-family: proxima-nova, sans-serif;
+	font-weight: 400;
+	color: #efefef;
+}
+#sidebar .machine-disconnected {
+	float: right;
+	text-transform: uppercase;
+	font-weight: 600;
+	font-size: 10px;
+	background: #24282e;
+	border-radius: 11px;
+	padding: 5px 8px 4px 8px;
+	box-shadow: 0px 0px 2px rgba(0,0,0, 0.4) inset;
+	text-shadow: 0px 0px 2px rgba(0,0,0,0.6);
+	position: relative;
+	color: #414954;
+	top: -2px;
+	right: -6px;
+}
+
+/****************************** RESIZE STYLES ********************************/
+
+#rightPane #dragbar {
+	position: absolute;
+	width: 5px;
+	cursor: col-resize;
+	left: 0px;
+	top: 0px;
+	bottom: 0px;
+	z-index: 1000;
+}
+
+/****************************** LOADING STYLES *******************************/
+
+#sidebar div.node.loading {
+	background: url(/static/img/sidebar/loader.gif) no-repeat;
+	width: 13px;
+	margin-right: 4px;
+	height: 10px;
+	vertical-align: middle;
+	cursor: auto;
+	margin-left: 3px;
+}
+
+#sidebar #hidden-text-tester {
+	color: #30363e;
+	font-family: proxima-nova, sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	opacity: 0.01;
+	display: inline;
+}
+
+/***************************** SCROLLBAR STYLES ******************************/
+
+/** Chrome, Opera & Safari **/
+#sidebar #machine-accordion .panel-body::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+	background-color: rgba(0, 0, 0, 0.1)
+}
+#sidebar #machine-accordion .panel-body::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.15);
+}
+#sidebar #machine-accordion .panel-body::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+#sidebar #machine-accordion .panel-body::-webkit-scrollbar-corner {
+    background-color: rgba(0, 0, 0, 0.1)
+}
+
+/******************************* HEADER STYLES *******************************/
+
+#sidebar-header {
+	width: 100%;
+	height: 40px;
+	background: #dfe4ee;
+	border-bottom: 1px solid #c8d0de;
+	color: #56688a;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	padding-left: 15px;
+	border-right: 1px solid #c8d0de;
+	border-radius: 4px 0px 0px 0px;
+}
+#sidebar-header #title {
+	font-family: proxima-nova, Arial;
+	font-weight: 600;
+	font-size: 15px;
+	vertical-align: middle;
+	float: left;
+	text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+	text-transform: uppercase;
+	margin-top: 12px;
+	-webkit-font-smoothing: antialiased;
+}
+#sidebar-header #buttons {
+	float: right;
+	padding-right: 10px;
+	vertical-align: middle;
+}
+#sidebar-header #buttons button {
+	color: #56688a;
+	margin-top: 8px;
+	padding: 4px 12px;
+	border-radius: 12px;
+	outline: 0 none;
+	font-size: 12px;
+	width: 38px;
+}
+
+/**************************** SIDEBAR PANEL STYLES ***************************/
+
+#sidebar .sidebar-panel {
+	width: 100%;
+	height: 100%;
+	display: block;
+	white-space: normal;
+}
+
+#sidebar #loading-panel {
+	background: url(/static/img/sidebar/root-loader.gif) no-repeat center;
+}
+#sidebar #empty-panel .empty-text-border {
+	width: 200px;
+	margin: 0 auto;
+	display: block;
+	border-top: 1px solid #181818;
+	border-bottom: 1px solid #444;
+}
+#sidebar #empty-panel #empty-text-outer {
+	position: absolute;
+	left: 20px;
+	right: 20px;
+	top: 50%;
+	margin-top: -62px;
+}
+#sidebar #empty-panel #empty-text-inner {
+	width: 200px;
+	text-align: center;
+	margin: 10px auto;
+	font-weight: 400;
+	color: #111;
+	text-shadow: -1px 0px 0px #4e4e4e;
+	font-family: 'Roboto Condensed', Arial;
+	font-size: 18px;
+}
+#sidebar #error-panel #error-text-outer {
+	position: absolute;
+	left: 20px;
+	right: 20px;
+	top: 50%;
+	margin-top: -104px;
+}
+#sidebar #error-panel #error-text-inner {
+	width: 200px;
+	text-align: center;
+	margin: 0px auto;
+	font-weight: 400;
+	font-family: 'Roboto Condensed', Arial;
+	font-size: 18px;
+	text-shadow: -1px 0px 0px rgba(255, 255, 255, 0.8);
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+}

@@ -1,0 +1,74 @@
+#picture{
+	position: relative;
+	height: 100%;
+	width: 100%;
+	background: url(/static/img/bitbeamBackground.png) no-repeat center center;
+	background-size: cover;
+}
+
+#centerContents{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10%;
+	width: 700px;
+}
+
+#logo{
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 30px;
+	height: 200px;
+	font-size: 160px;
+	color: white;
+	text-shadow:
+    -3px -3px 0 #000,
+    3px -3px 0 #000,
+    -3px 3px 0 #000,
+    3px 3px 0 #000;
+	font-style:italic;
+	text-align: center;
+	line-height: 250px;
+	font-family: "Comic Sans MS";
+}
+
+#login{
+	display: block;
+	font-size: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+	width: 300px;
+	text-align: center;
+	background-color: orange;
+}
+
+#miniDescription{
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+	width: 400px;
+	text-align: center;
+	background-color: red;
+}
+
+#moreInfoBtn{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 150px;
+	height: 35px;
+}
+
+div{
+	display: block;
+}
+
+body{
+	overflow: hidden;
+}

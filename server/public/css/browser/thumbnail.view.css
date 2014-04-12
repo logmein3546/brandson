@@ -1,0 +1,60 @@
+/******************************* GENERAL STYLES ******************************/
+
+#iconMode div.fileContainer{
+	float: left;
+	width: 130px;
+	height: 160px;
+	margin: 5px;
+}
+
+#iconMode div.innerFileContainer{
+	width: 100%;
+	padding: 12px 5px;
+}
+
+#iconMode div.machineIcon{
+	margin: 0px auto;
+	background: url(/static/img/computer.png) no-repeat;
+	display: block;
+	width: 90px;
+	height: 75px;
+	cursor: pointer;
+}
+
+#iconMode div.machineIconAvailable{
+	background-position: bottom left;
+}
+
+#iconMode div.machineIconUnavailable{
+	background-position: top left;
+}
+
+#iconMode div.machineText{
+	display: block;
+	margin: 5px auto;
+	text-align: center;
+	font-size: 16px;
+}
+
+#iconMode div.fileOrFolderIcon{
+	margin: 0px auto;
+	display: block;
+	width: 90px;
+	height: 75px;
+	cursor: pointer;
+}
+
+#iconMode div.folderIcon{
+	background: url(/static/img/folder.png) no-repeat;
+}
+
+#iconMode div.fileIcon{
+	background: url(/static/img/file.png) no-repeat;
+}
+
+#iconMode div.fileText{
+	display: block;
+	margin: 5px auto;
+	text-align: center;
+	font-size: 16px;
+}

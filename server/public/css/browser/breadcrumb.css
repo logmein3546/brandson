@@ -1,0 +1,66 @@
+/******************************* GENERAL STYLES ******************************/
+
+#breadcrumbs{
+	color: rgb(86, 104, 138);
+	background-color: #dfe4ee;
+	position: absolute;
+	top: 0px;
+	height: 40px;
+	border-left: 1px solid #f0f0f0;
+	border-bottom: 1px solid #c8d0de;
+	left: 0px;
+	right: 0px;
+}
+
+#breadcrumbs span.breadcrumbText{
+	cursor: pointer;
+}
+
+/******************************* HEADER STYLES *******************************/
+
+#breadcrumbs .navigation {
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 10px;
+}
+#breadcrumbs .switcher {
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	right: 10px;
+}
+#breadcrumbs .buttons button {
+	color: #56688a;
+	margin: 8px 0px 0px 0px;
+	padding: 4px 12px;
+	border-radius: 12px;
+	outline: 0 none;
+	font-size: 12px;
+	float: left;
+}
+#breadcrumbs .buttons button.left {
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	width: 38px;
+}
+#breadcrumbs .buttons button.right {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-left: none;
+	width: 37px;
+}
+
+/******************************** PATH STYLES ********************************/
+
+#breadcrumbs .path {
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	right: 95px;
+	left: 95px;
+	margin: 0px;
+	background: transparent;
+	padding-left: 0px;
+	padding-top: 10px;
+}

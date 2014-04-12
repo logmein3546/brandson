@@ -1,0 +1,110 @@
+/**************************** FILE SELECTOR STYLES ****************************/
+
+#fileSelector {
+	background-color: #fefefe;
+	overflow-y: auto;
+	overflow-x: hidden;
+	position: absolute;
+	top: 40px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	z-index: 100;
+}
+
+#fileSelector .highlightOnHover:hover {
+	background-color: #c2dff2;
+}
+
+/**************************** TABLE HEADER STYLES ****************************/
+
+#fileSelector #detailMode tr.headers th {
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+/*
+#fileSelector #detailMode tr.headers #type {
+	width: 60px;
+}
+#fileSelector #detailMode tr.headers #name {
+	width: 400px;
+}
+#fileSelector #detailMode tr.headers #datetime {
+	width: 160px;
+}
+#fileSelector #detailMode tr.headers #size {
+	width: 100px;
+}
+*/
+/******************************* GENERAL STYLES ******************************/
+
+#detailMode table.table {
+}
+
+#detailMode div.machineIcon {
+	background-repeat: no-repeat;
+	background: url(/static/img/computer.png);
+	display: inline-block;
+	width: 39px;
+	height: 32px;
+	cursor: pointer;
+}
+
+#detailMode div.machineIconAvailable {
+	background-position: bottom left;
+}
+
+#detailMode div.machineIconUnavailable {
+	background-position: top left;
+}
+
+#detailMode div.machineText {
+	display: inline-block;
+	padding-left: 10px;
+	vertical-align: top;
+	padding-top: 5px;
+}
+
+#detailMode div.tableHeaderText {
+	display: inline;
+	color: #56688a;
+}
+
+#detailMode div.tableHeaderSort {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+}
+
+#detailMode div.tableHeaderSortDescending {
+	background-color: red;
+}
+
+#detailMode div.tableHeaderSortAscending {
+	background-color: blue;
+}
+
+#detailMode div.fileOrFolderIcon {
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+}
+
+#detailMode div.folderIcon {
+	background: url(/static/img/folder.png) no-repeat;
+}
+
+#detailMode div.fileIcon {
+	background: url(/static/img/file.png) no-repeat;
+}
+
+#detailMode div.fileAtributeText, 
+#detailMode td.fileAtributeText {
+	color: red;
+}
