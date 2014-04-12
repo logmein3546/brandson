@@ -1,0 +1,104 @@
+/******************************** LAYOUT STYLES ******************************/
+
+#leftPane {
+	position: absolute;
+	left: 50px;
+	top: 40px;
+	bottom: 0px;
+	width: 300px;
+	background: #1c1f24;
+}
+
+#rightPane {
+	position: absolute;
+	top: 40px;
+	bottom: 0px;
+	left: 350px;
+	right: 0px;
+	overflow-x: hidden;
+}
+
+#titleBlock {
+	font-weight: bold;
+	font-size: 25px;
+	padding: 8px 20px;
+	color: white;
+	background-color: #1f70a8;
+	position: absolute;
+	top: 0px;
+	height: 50px;
+	width: 100%;
+}
+
+/******************************** OPTION STYLES ******************************/
+
+#options {
+	position: absolute;
+	top: 0px;
+	right: 0%;
+	width: 100px;
+	height: 50px;
+	padding: 5px;
+}
+
+#options div.changeViewModeButton {
+	float: right;
+	height: 40px;
+	width: 40px;
+}
+
+#options div.changeViewModeButtonDetailed {
+	background-color: green;
+}
+
+#options div.changeViewModeButtonIcon {
+	background-color: brown;
+}
+
+/**************************** INSTALLER MODAL STYLES *************************/
+
+#installer-modal {
+	font-family: 'Roboto Condensed' !important;
+}
+#installer-modal .modal-content {
+	width: 500px;
+	margin-left: -250px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -138px;
+}
+#installer-modal .modal-footer {
+	text-align: center;
+	margin-top: 0px;
+}
+#installer-modal .modal-footer button {
+	width: 155px;
+	outline: 0 none;
+}
+#installer-modal .modal-header .modal-title {
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+}
+#installer-modal .modal-header .close {
+	margin-top: 2px;
+	outline: 0 none;
+}
+#installer-modal .modal-body {
+	font-size: 18px;
+	font-weight: 300;
+}
+#installer-modal .graphic { 
+	float: left;
+	margin-right: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+#installer-modal .alert {
+	font-size: 14px;
+	margin-bottom: 0px;
+	margin-top: 10px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}

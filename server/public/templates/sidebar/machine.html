@@ -1,0 +1,38 @@
+<div class="panel panel-default" ng-on-render="(machine.added) ? resizeAccordion() : (($index === (machines.length - 1)) && resizeAccordion())" ng-class="{'locked': ($index + 1 === machines.length)}">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+			<!-- Has the dimmed class if there was an error -->
+			<a class="{{ machine.machineType }}" ng-click="doCollapse($index, machine)">{{ machine.dirName }}<span class="machine-disconnected no-text-select" ng-show="machine.status === 3">Not Connected</span></a>
+		</h4>
+    </div>
+    <div id="accordion-{{ $index }}" class="panel-collapse collapse" ng-class="{'in': !$index }" ng-switch on="machine.status">
+		<div class="panel-body">
+			<!-- The status of the machine: MACHINE_STATE_NORMAL -->
+			<div class="sidebar-panel" ng-switch-when="2">
+				<div class="nodeContainer row" ng-repeat="node in machine.nodes" ng-include="'/static/templates/treeElement.html'" ></div>
+			</div>
+			<!-- The status of the machine: MACHINE_STATE_LOADING -->
+			<div class="sidebar-panel" id="loading-panel" ng-switch-when="0"></div>
+			<!-- The status of the machine: MACHINE_STATE_EMPTY -->
+			<div id="empty-panel" style="white-space: normal;" ng-switch-when="1">
+				<div id="empty-text-outer" style="margin-top: {{ accordionPromptMargin }}px;">
+					<div class="empty-text-border"></div>
+					<div class="no-text-select" id="empty-text-inner">
+						You haven't created any machines yet.
+						You can get started by clicking the </br><span style="font-size: 12px; top: -1px;" class="glyphicon glyphicon-plus"></span> button in the toolbar.
+					</div>
+					<div class="empty-text-border"></div>
+				</div>
+			</div>
+			<!-- The status of the machine: MACHINE_STATE_ERROR -->
+			<div id="empty-panel" style="white-space: normal;" ng-switch-when="3">
+				<div class="empty-text-border" style="margin-top: {{ accordionPromptMargin }}px;"></div>
+				<div class="no-text-select" id="empty-text-inner">
+					We failed to connect to this machine.
+					It probably just doesn't have an internet connection right now.
+				</div>
+				<div class="empty-text-border"></div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,55 @@
+/******************************* GENERAL STYLES ******************************/
+
+html, body, #content {
+	height: 100%;
+	width: 100%;
+}
+
+.no-text-select {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.modal {
+	overflow-y: hidden;
+}
+
+/******************************* LAYOUT STYLES ******************************/
+
+#header {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	height: 40px;
+	background: #1f70a8;
+}
+
+#navigation {
+	width: 50px;
+	position: absolute;
+	left: 0px;
+	top: 40px;
+	bottom: 0px;
+	background: #1c1f24;
+}
+
+#content {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	padding-top: 40px;
+	padding-left: 50px;
+}
+
