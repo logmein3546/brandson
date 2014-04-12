@@ -1,0 +1,9 @@
+{
+	"debug": true,
+	"host": "thecodebutler.com",
+	"httpPort": 80,
+	"secretKey": "secret_key",
+	"defaultObjectArray": false, 
+	"isPersistent": false,
+	"isSecure": false,
+}
