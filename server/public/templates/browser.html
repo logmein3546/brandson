@@ -1,60 +1,16 @@
-<!-- Installer Modal -->
-<div class="modal fade" id="installer-modal" ng-controller="InstallerModalCtrl" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="installer-modal" aria-hidden="true">
-	<div class="modal-content">
-		<div class="modal-header">
-			<h4 class="modal-title" id="installer-modal">Connect this computer to BitBeam</h4>
-		</div>
-		<div class="modal-body" ng-switch on="step">
-			<div class="modal-body-step" ng-switch-when="0">
-				<img class="graphic" src="/static/img/installer-graphic.png" />
-				Once the BitBeam client is installed on your computer, it will be accessible to you, and only you, from any browser with an internet connection and a capable web browser.
-			</div>
-			<div class="modal-body-step" ng-switch-when="1">
-				<p>
-					<span style="font-size: 22px; margin-bottom: 10px; display: block; font-weight: 400;">Now Downloading a Fresh Installer...</span>
-					If the download doesn't start in a couple seconds, then click <a style="text-decoration: none;" href="/installer/download">this link.<a/> Open up the installer, and hit up the next button below when you're ready.
-				</p>
-			</div>
-			<div class="modal-body-step" ng-switch-when="2">
-				<img class="graphic" style="height: 200px; padding: 0px;" src="/static/img/installer/installer-screenshot.png" />
-				When the installer launches, press the "Next" button until you get to a page that looks like one on the left. Hit the "I'm Ready" button in this dialog when you get there.
-			</div>
-			<div class="modal-body-step" ng-switch-when="3">
-				<p><span style="font-size: 22px; margin-bottom: 10px; display: block; font-weight: 400;">Copy the Installer Key</span>Paste the key from the installer below:</p>
-				<input type="text" class="form-control" id="installer-key" ng-enter="next()" placeholder="Installer Key e.g. fOYhbzjQIEqnvupVYjJf" ng-focus-on-load>
-				<div id="installer-key-alert" style="display: none" class="alert alert-danger"></div>
-			</div>
-			<div class="modal-body-step" ng-switch-when="4">
-				<p><span style="font-size: 22px; margin-bottom: 10px; display: block; font-weight: 400;">Almost There!</span>Choose a name to describe this computer below:</p>
-				<input type="text" class="form-control" id="computer-name" ng-enter="next()" placeholder="Computer Name e.g. GLaDOS" ng-focus-on-load>
-				<div id="computer-name-alert" style="display: none" class="alert alert-danger"></div>
-			</div>
-			<div class="modal-body-step" ng-switch-when="5">
-				<p><span style="font-size: 22px; margin-bottom: 10px; display: block; font-weight: 400;">Please Wait</span>We're clearing up a spot for your new BitBeam machine!</p>
-				<div style="margin-bottom: 0px; margin-top: 20px;" class="progress progress-striped active">
-					<div class="progress-bar"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer" style="{{(step === 5) ? 'display: none;' : ''}}">
-			<button type="button" class="btn {{(step < 1) ? 'btn-primary' : 'btn-success'}}" ng-click="next()">{{nextPrompt}}</button>
-			<button type="button" class="btn btn-default" ng-click='escape()' data-dismiss="modal" ng-show="step < 3">Nah, Forget It</button>
-		</div>
-	</div>
-</div>
 <!-- General Layout -->
 <div id="leftPane" ng-controller="BrowserSidebarCtrl">
-	<div id="sidebar-header">
-		<h4 id="title">Machines</h4>
+	<div class="header">
+		<h4 id="title">Navigator</h4>
 		<div id="buttons">
-			<button type="button" class="btn btn-default glyphicon glyphicon-plus" ng-click="installerModal()"></button>
+			<button type="button" class="btn btn-default glyphicon glyphicon-refresh" ng-click="installerModal()"></button>
 		</div>
 	</div>
 	<div id="sidebar" ng-switch on="state">
 		<!-- TODO Add loading and empty alt vews in an ng-switch -->
 		<div class="panel-group" id="machine-accordion" ng-switch-when="2">
 			<!-- The state is: SIDEBAR_STATE_NORMAL -->
-			<div class="panel panel-default" ng-repeat="machine in machines" ng-include="'/static/templates/sidebar/machine.html'"></div>
+			<div class="nodeContainer row" ng-repeat="node in nodes" ng-include="'/static/templates/treeElement.html'" ></div>
 		</div>
 		<div class="sidebar-panel" id="loading-panel" ng-switch-when="0">
 			<!-- The state is: SIDEBAR_STATE_LOADING -->
@@ -64,8 +20,7 @@
 			<div id="empty-text-outer">
 				<div class="empty-text-border"></div>
 				<div class="no-text-select" id="empty-text-inner">
-					You haven't created any machines yet.
-					You can get started by clicking the </br><span style="font-size: 12px; top: -1px;" class="glyphicon glyphicon-plus"></span> button in the toolbar.
+					Sir, there appears to be nothing in this directory.</br>If you doubt my assessment, click the <span class="glyphicon glyphicon-refresh" style="font-size: 12px; padding: 0px 3px;"></span> button above.
 				</div>
 				<div class="empty-text-border"></div>
 			</div>
@@ -74,97 +29,42 @@
 			<!-- The state is: SIDEBAR_STATE_ERROR -->
 			<div id="error-text-outer">
 				<div class="alert alert-danger" id="error-text-inner">
-					Oh Snap! It looks like we couldn't load your machines.
-					Make sure you have a solid connection to the server - then refresh the page.
+					Sir, it appears that I couldn't procure the contents of this directory. Check your connection.
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div id ="rightPane">
-	<div id="breadcrumbs" ng-controller="BreadcrumbCtrl">
-		<div class="buttons navigation">
-			<button type="button" class="btn btn-default glyphicon glyphicon-chevron-left left disabled"></button>
-			<button type="button" class="btn btn-default glyphicon glyphicon-chevron-right right disabled"></button>
+<div id ="rightPane" ng-controller="BrowserContentCtrl">
+	<div style="position: absolute; left: 0px; right: 0px; bottom: 0px; top: 0px; background: #fff;" ng-switch on="state">
+		<div id="dragbar"></div>
+		<div class="header" ng-switch-when="2">
+			<div style="float: left;">
+				<button id="left-toggle" type="button" class="btn btn-default glyphicon glyphicon-th-list" ng-click="leftNav()"></button>
+			</div>
+			<div id="path-heading">
+				{{suchPath}}
+			</div>
+			<div id="buttons">
+				<button type="button" class="btn btn-default glyphicon glyphicon-save" ng-click="save()"></button>
+				<button type="button" class="btn btn-default glyphicon glyphicon-user" ng-click=""></button>
+				<button type="button" class="btn btn-default glyphicon glyphicon-share-alt" ng-click=""></button>
+			</div>
 		</div>
-		<div class="buttons switcher">
-			<button type="button" class="btn btn-default glyphicon glyphicon-th-list left active"></button>
-			<button type="button" class="btn btn-default glyphicon glyphicon-th right"></button>
-		</div>
-		<ol class="breadcrumb path" ng-show="currentMachine !== ''">
-			<li><a><span class="glyphicon glyphicon-home"><span style="font-size: 9px;">&nbsp;</span><span/>Home</a></li>
-			<li><a>{{ currentMachine }}</a></li>
-			<li class="active" ng-repeat="folder in currentPath"><a ng-click="navBreadcrumb($index+1)">{{ folder }}</a></li>
-		</ol>
-	</div>
-	<div id="dragbar"></div>
-	<div id="fileSelector" ng-switch="displayDetailMode" ng-controller="FileViewerCtrl">
-		<div id="detailMode" ng-switch-when="true" ng-switch="currentMachine">
-			<table class="table" ng-switch-when="">
-				<tr class="tr highlightOnHover clickable" ng-repeat="machine in machines" ng-click="navIn(machine.machineName)">
-					<td class="td">
-						<div class="machineIcon {{ (machine.available)? 'machineIconAvailable' : 'machineIconUnavailable' }}"/>
-						<div class="machineText">{{ machine.machineName }}</div>
-					</td>
-				</tr>
-			</table>
-			<table class="table table-hover" ng-switch-default>
-				<thead class="header">
-					<tr class="tr headers">
-						<th id="type" class="no-text-select" ng-click="changeSorting('isDir')">
-							<div class="tableHeaderText no-text-select">Type</div>
-							<div class="tableHeaderSort {{ (isDescending)? 'tableHeaderSortDescending' : 'tableHeaderSortAscending' }}" ng-show="sortColumn === 'isDir'"/>
-						</th>
-						<th id="name" class="no-text-select" ng-click="changeSorting('name')">
-							<div class="tableHeaderText no-text-select">Name</div>
-							<div class="tableHeaderSort {{ (isDescending)? 'tableHeaderSortDescending' : 'tableHeaderSortAscending' }}" ng-show="sortColumn === 'name'"/>
-						</th>
-						<th id="datetime" class="no-text-select dateTimeColumn" ng-click="changeSorting('mtime')">
-							<div class="tableHeaderText no-text-select">Date Modified</div>
-							<div class="tableHeaderSort {{ (isDescending)? 'tableHeaderSortDescending' : 'tableHeaderSortAscending' }}" ng-show="sortColumn === 'mtime'"/>
-						</th>
-						<th id="size" class="no-text-select sizeColumn" ng-click="changeSorting('size')">
-							<div class="tableHeaderText no-text-select">Size</div>
-							<div class="tableHeaderSort {{ (isDescending)? 'tableHeaderSortDescending' : 'tableHeaderSortAscending' }}" ng-show="sortColumn === 'size'"/>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="file in files | orderBy:sortColumn:isDescending" ng-click="(file.isDir)? navIn(file.name) : downloadFile(file.name)">
-						<td><div class="fileOrFolderIcon {{ (file.isDir)? 'folderIcon' : 'fileIcon' }}"></div></td>
-						<td>{{ file.name }}</td>
-						<td>{{ getDateString(file.mtime) }} {{ getTimeString(file.mtime) }}</td>
-						<td ng-show="file.isDir"></td>
-						<td ng-show="!file.isDir">{{ (file.size / 1024).toFixed(2) }} KB</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div id="iconMode" ng-switch-when="false" ng-switch="currentMachine">
-			<div ng-switch-when="">
-				<div class="fileContainer" ng-repeat="machine in machines">
-					<div class="clickable highlightOnHover innerFileContainer" ng-click="navIn(machine.machineName)">
-						<div class="machineIcon {{ (machine.available)? 'machineIconAvailable' : 'machineIconUnavailable' }}"/>
-						<div class="machineText">{{ machine.machineName }}</div>
-					</div>
+		<div id="editor" ng-controller="EditorCtrl" ng-switch-when="2"></div>
+		<div class="sidebar-panel" id="empty-panel" style="background-color: #fff;" ng-switch-when="1">
+			<!-- The state is: SIDEBAR_STATE_EMPTY -->
+			<div id="empty-text-outer" style="margin-top: -150px;">
+				<div class="well" id="empty-text-inner" style="width: 300px; text-shadow: none; color: #333; font-size: 22px;">
+					<span class="glyphicon glyphicon-info-sign" style="font-size: 96px; padding-bottom: 18px;"></span></br>
+					Salutations. To get started, simply select a file from the left navigation so we can get right to work.
 				</div>
 			</div>
-			<div ng-switch-default>
-				<div ng-repeat="file in files" ng-switch="file.isDir">
-					<div class="fileContainer" ng-switch-when="true">
-						<div class="clickable highlightOnHover innerFileContainer" ng-click="navIn(file.name)">
-							<div class="fileOrFolderIcon folderIcon"/>
-							<div class="fileText">{{ file.name }}</div>
-						</div>
-					</div>
-					<div class="fileContainer" ng-switch-when="false">
-						<div class="clickable highlightOnHover innerFileContainer" ng-click="downloadFile(file.name)">
-							<div class="fileOrFolderIcon fileIcon"/>
-							<div class="fileText">{{ file.name }}</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		</div>
+		<div class="sidebar-panel" id="loading-panel-white" ng-switch-when="0">
+			<!-- The state is: SIDEBAR_STATE_LOADING -->
+		</div>
+		<div class="sidebar-panel" id="loading-panel" ng-switch-default>
 		</div>
 	</div>
 </div>

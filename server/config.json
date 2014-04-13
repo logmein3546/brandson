@@ -5,5 +5,5 @@
 	"secretKey": "secret_key",
 	"defaultObjectArray": false, 
 	"isPersistent": false,
-	"isSecure": false,
+	"isSecure": false
 }

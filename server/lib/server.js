@@ -6,6 +6,7 @@ Goals:
 */
 
 var express = require("express");
+var connect = require('connect');
 var http = require('http');
 var https = require('https');
 var fs = require('fs');
@@ -145,16 +146,16 @@ var init = function(config){
 }
 
 var setup = function(){
-	if (DEBUG) app.use(express.logger('dev'));
-	app.use(express.cookieParser());
-	app.use(express.session({
+	if (DEBUG) app.use(connect.logger('dev'));
+	app.use(connect.cookieParser());
+	app.use(connect.session({
 		secret: SECRET_KEY,
-		store: express.session.MemoryStore({
+		store: connect.session.MemoryStore({
 			reapInterval: 60000 * 10
 		})
 	}));
-	app.use(express.json());
-	app.use(express.urlencoded());
+	app.use(connect.json());
+	app.use(connect.urlencoded());
 	configure(app);
 
 	/*----------------------------AUTH ROUTES------------------------------*/

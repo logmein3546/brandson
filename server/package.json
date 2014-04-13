@@ -1,12 +1,41 @@
 {
-  "name": "bitbeam-server",
+  "name": "branson-server",
+  "preferGlobal": true,
   "version": "0.0.1",
+  "author": "Tom Caputi <caputit1@tcnj.edu>",
+  "description": "code butler extrordinare will facilitate all your code collaboration needs. Would you like caviar with that?",
+  "contributors": [ 
+    {
+      "name": "Sandile Keswa",
+      "email": "me@sandile.io"
+    } 
+  ],
+  "bin": {
+    "branson": "./server"
+  },
+  "scripts": {
+    "start": "node ./server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/logmein3546/branson"
+  },
+  "keywords": [
+    "branson",
+    "code",
+    "collaboration"
+  ],
   "dependencies": {
     "express": "*",
     "MD5": "*",
     "qs": "*",
     "request": "*",
     "mongodb": "*",
-    "temp": "^0.7.0"
+    "temp": "^0.7.0",
+    "connect": "^2.14.4"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10"
   }
 }

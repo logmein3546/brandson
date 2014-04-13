@@ -2,18 +2,19 @@
 
 #leftPane {
 	position: absolute;
-	left: 50px;
-	top: 40px;
+	left: 0px;
+	top: 0px;
 	bottom: 0px;
 	width: 300px;
 	background: #1c1f24;
+	overflow: hidden;
 }
 
 #rightPane {
 	position: absolute;
-	top: 40px;
+	top: 0px;
 	bottom: 0px;
-	left: 350px;
+	left: 300px;
 	right: 0px;
 	overflow-x: hidden;
 }
@@ -101,4 +102,57 @@
 	margin-top: 10px;
 	padding-bottom: 10px;
 	padding-top: 10px;
+}
+
+/**/
+#editor {
+	position: absolute;
+	top: 40px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+#editor .CodeMirror {
+	height: 100%;
+}
+.powered-by-firepad {
+	display: none;
+}
+.firepad {
+	height: 100%;
+}
+#left-toggle {
+	font-size: 15px;
+	outline: 0 none;
+	text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+	background-image: none;
+	background-color: transparent;
+	border: 0px;
+	color: #56688a;
+	width: auto;
+	box-shadow: none;
+	margin-left: -8px;
+	margin-top: 4px;
+}
+#left-toggle:focus,
+#left-toggle:active {
+	background-image: none;
+}
+#left-toggle:hover {
+	color: #728ab8;
+}
+#path-heading {
+	font-family: proxima-nova, Arial;
+	font-weight: 600;
+	font-size: 18px;
+	vertical-align: middle;
+	text-shadow: 1px 0px 0px rgba(255, 255, 255, 0.3);
+	margin-top: 8px;
+	-webkit-font-smoothing: antialiased;
+	color: #56688a;
+	width: 300px;
+	left: 50%;
+	margin-left: -150px;
+	position: absolute;
+	text-align: center;
 }

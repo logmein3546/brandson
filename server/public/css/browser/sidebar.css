@@ -3,19 +3,20 @@
 #sidebar {
 	background-color: #30363e;
 	color: white;
-	overflow: hidden;
+	overflow-x: auto;
+	overflow-y: auto;
 	position: absolute;
 	top: 40px;
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
+	padding-top: 10px;
 }
 
 /** accordion **/
 
 #sidebar #machine-accordion {
 	border-width: 0px;
-	height: 100%;
 }
 
 #sidebar #machine-accordion .panel-default {
@@ -96,7 +97,7 @@
 }
 
 #sidebar .row {
-	margin: 4px 0px;
+	margin: 6px 0px;
 	margin-left: 22px;
 }
 
@@ -130,6 +131,12 @@
 #sidebar .nodeText.folder {
 	padding-left: 30px;
 	background: url(/static/img/sidebar-folder.png) no-repeat;
+	background-position: 0px 1px;
+}
+
+#sidebar .nodeText.file {
+	padding-left: 30px;
+	background: url(/static/img/sidebar-file.png) no-repeat;
 	background-position: 0px 1px;
 }
 
@@ -198,26 +205,26 @@
 /***************************** SCROLLBAR STYLES ******************************/
 
 /** Chrome, Opera & Safari **/
-#sidebar #machine-accordion .panel-body::-webkit-scrollbar {
+#sidebar  ::-webkit-scrollbar {
     width: 12px;
     height: 12px;
 	background-color: rgba(0, 0, 0, 0.1)
 }
-#sidebar #machine-accordion .panel-body::-webkit-scrollbar-thumb {
+#sidebar ::-webkit-scrollbar-thumb {
 	background-color: rgba(0, 0, 0, 0.15);
 }
-#sidebar #machine-accordion .panel-body::-webkit-scrollbar-button {
+#sidebar ::-webkit-scrollbar-button {
     width: 0;
     height: 0;
     display: none;
 }
-#sidebar #machine-accordion .panel-body::-webkit-scrollbar-corner {
+#sidebar ::-webkit-scrollbar-corner {
     background-color: rgba(0, 0, 0, 0.1)
 }
 
 /******************************* HEADER STYLES *******************************/
 
-#sidebar-header {
+.header {
 	width: 100%;
 	height: 40px;
 	background: #dfe4ee;
@@ -229,9 +236,8 @@
 	right: 0px;
 	padding-left: 15px;
 	border-right: 1px solid #c8d0de;
-	border-radius: 4px 0px 0px 0px;
 }
-#sidebar-header #title {
+.header #title {
 	font-family: proxima-nova, Arial;
 	font-weight: 600;
 	font-size: 15px;
@@ -242,12 +248,12 @@
 	margin-top: 12px;
 	-webkit-font-smoothing: antialiased;
 }
-#sidebar-header #buttons {
+.header #buttons {
 	float: right;
 	padding-right: 10px;
 	vertical-align: middle;
 }
-#sidebar-header #buttons button {
+.header #buttons button {
 	color: #56688a;
 	margin-top: 8px;
 	padding: 4px 12px;
@@ -259,48 +265,51 @@
 
 /**************************** SIDEBAR PANEL STYLES ***************************/
 
-#sidebar .sidebar-panel {
+.sidebar-panel {
 	width: 100%;
 	height: 100%;
 	display: block;
 	white-space: normal;
 }
 
-#sidebar #loading-panel {
+#loading-panel {
 	background: url(/static/img/sidebar/root-loader.gif) no-repeat center;
 }
-#sidebar #empty-panel .empty-text-border {
+#loading-panel-white {
+	background: url(/static/img/white-loader.gif) no-repeat center;
+}
+#empty-panel .empty-text-border {
 	width: 200px;
 	margin: 0 auto;
 	display: block;
 	border-top: 1px solid #181818;
 	border-bottom: 1px solid #444;
 }
-#sidebar #empty-panel #empty-text-outer {
+#empty-panel #empty-text-outer {
 	position: absolute;
 	left: 20px;
 	right: 20px;
 	top: 50%;
 	margin-top: -62px;
 }
-#sidebar #empty-panel #empty-text-inner {
+#empty-panel #empty-text-inner {
 	width: 200px;
 	text-align: center;
 	margin: 10px auto;
-	font-weight: 400;
-	color: #111;
-	text-shadow: -1px 0px 0px #4e4e4e;
+	font-weight: 200;
+	color: #ddd;
 	font-family: 'Roboto Condensed', Arial;
 	font-size: 18px;
+	text-shadow: -1px 0px 0px rgba(0, 0, 0, 0.55);
 }
-#sidebar #error-panel #error-text-outer {
+#error-panel #error-text-outer {
 	position: absolute;
 	left: 20px;
 	right: 20px;
 	top: 50%;
 	margin-top: -104px;
 }
-#sidebar #error-panel #error-text-inner {
+#error-panel #error-text-inner {
 	width: 200px;
 	text-align: center;
 	margin: 0px auto;

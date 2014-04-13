@@ -1,21 +1,4 @@
 app.service('BrowserSvc', function($http) {
-	this.getMachine = function (name) {
-		return $http({
-			url: '/machine',
-			method: "GET",
-			withCredentials: true,
-			params: {machineName: name}
-		});
-	};
-	
-	this.getMachines = function () {
-		return $http({
-			url: '/machines',
-			method: "GET",
-			withCredentials: true
-		});
-	};
-
 	this.ls = function (machineName, path) {
 		return $http({
 			url: '/ls',
@@ -24,15 +7,22 @@ app.service('BrowserSvc', function($http) {
 			params: {machineName: machineName, path: path}
 		});
 	};
-});
-
-app.service('InstallerSvc', function($http) {
-	this.claim = function (key, name) {
+	
+	this.file = function (machineName, path) {
 		return $http({
-			url: '/installer/claim',
-			method: "POST",
+			url: '/file',
+			method: "GET", 
 			withCredentials: true,
-			params: {key: key, machineName: name}
+			params: {machineName: machineName, path: path}
+		});
+	};
+	
+	this.save = function (machineName, path, text) {
+		return $http({
+			url: '/save',
+			method: "POST", 
+			withCredentials: true,
+			data: {machineName: machineName, path: path, text: text}
 		});
 	};
 });

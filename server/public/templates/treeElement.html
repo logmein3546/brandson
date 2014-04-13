@@ -1,5 +1,5 @@
 <div class="clickable no-text-select node" ng-click="(node.expanded) ? contract(node) : expand(node, $event)" ng-class="{'loading': node.isLoading, 'nodeExpanded': node.expanded, 'nodeClosed': !node.expanded, 'nodeUnexpandable': !node.expandable }"/>
-<div class="clickable no-text-select nodeText {{node.isMachine ? 'machine' : 'folder'}} {{node.isMachine ? node.machineType : ''}}" ng-click="navJump(node)">{{ node.dirName }}</div>
+<div class="clickable no-text-select nodeText {{node.isDir ? 'folder' : 'file'}}" ng-click="(!node.isDir) ? navJump(node) : console.log()">{{ node.dirName || node.name }}</div>
 <div class="child no-text-select expander" ng-show="node.expanded">
 	<div class="row" ng-repeat="node in node.nodes" ng-include="'/static/templates/treeElement.html'"></div>
 </div>
