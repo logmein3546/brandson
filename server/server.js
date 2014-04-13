@@ -125,7 +125,6 @@ var options = {
 var tlsServer = tls.createServer(options, function(socket) {
 	var body = '';
 	socket.on('data', function(data){
-		console.log(data.toString());
 		if(!data.toString().endsWith(END_STRING)){
 			body += data.toString()
 		}else{
@@ -155,7 +154,6 @@ var tlsServer = tls.createServer(options, function(socket) {
 	socket.once('connect', function(payload){
 		socket.bitbeamKey = payload.key;
 		socket.bitbeamSecret = payload.secret;
-		console.log('socket connected ' + socket.bitbeamKey);
 		socketMap[(payload.key)] = socket;
 	});
 	socket.setTimeout(1200000, function(){

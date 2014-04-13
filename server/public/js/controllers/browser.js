@@ -224,7 +224,11 @@ app.controller("BrowserContentCtrl", function($routeParams, $scope, $rootScope, 
 		setTimeout(function() {
 		BrowserSvc.file($routeParams.machineName, $routeParams.path).success(function(contents) {
 			setTimeout(function() {
-				doEditor($routeParams.path, contents);
+				if (typeof contents !== 'string') {
+					contents = JSON.stringify(contents);
+					console.log('caught um');
+				}
+				doEditor(args.path, contents);
 			}, 500);
 			$scope.state = STATE_NORMAL;
 		}).error(function(err) {
@@ -241,6 +245,10 @@ app.controller("BrowserContentCtrl", function($routeParams, $scope, $rootScope, 
 		$scope.suchPath = args.path;
 		BrowserSvc.file($routeParams.machineName, args.path).success(function(contents) {
 			setTimeout(function() {
+				if (typeof contents !== 'string') {
+					contents = JSON.stringify(contents);
+					console.log('caught um');
+				}
 				doEditor(args.path, contents);
 			}, 150);
 			$scope.state = STATE_NORMAL;
@@ -284,6 +292,19 @@ app.controller("BrowserContentCtrl", function($routeParams, $scope, $rootScope, 
 		}
 	};
 	
+	var rightNavVisible = true;
+	$scope.rightNav = function() {
+		if (rightNavVisible) {
+			$('#editor').css('right', 0);
+			$('#userlist').css('width', 0);
+			rightNavVisible = !rightNavVisible;
+		} else {
+			$('#editor').css('right', 200); 
+			$('#userlist').css('width', 200);
+			rightNavVisible = !rightNavVisible;
+		}
+	};
+	
 	var escape = function(str) {
 		return str.replace(/[\.#\[\]\$]/g, '');
 	};
@@ -297,10 +318,16 @@ app.controller("BrowserContentCtrl", function($routeParams, $scope, $rootScope, 
 		
 		//// Create CodeMirror (with lineWrapping on).
 		var codeMirror = CodeMirror(document.getElementById('editor'), { lineWrapping: true, lineNumbers: true, mode: modeOf(path) });
-
+		
+		// Create a random ID to use as our user ID (we must give this to firepad and FirepadUserList).
+		var userId = Math.floor(Math.random() * 9999999999).toString();
+	
 		//// Create Firepad (with rich text toolbar and shortcuts enabled).
-		var firepad = Firepad.fromCodeMirror(childRef, codeMirror);
+		var firepad = Firepad.fromCodeMirror(childRef, codeMirror, { userId: userId });
 		existingEditor = firepad;
+		
+		//// Create FirepadUserList (with our desired userId).
+		var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'), document.getElementById('userlist'), userId);
 
 		//// Initialize contents.
 		firepad.on('ready', function() {

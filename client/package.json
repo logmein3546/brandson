@@ -1,7 +1,7 @@
 {
   "name": "branson",
   "preferGlobal": true,
-  "version": "0.3.0",
+  "version": "0.3.2",
   "author": "Tom Caputi <caputit1@tcnj.edu>",
   "description": "The code butler extrordinare will facilitate all your code collaboration needs. Would you like caviar with that?",
   "contributors": [ 

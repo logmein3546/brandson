@@ -47,11 +47,12 @@
 			</div>
 			<div id="buttons">
 				<button type="button" class="btn btn-default glyphicon glyphicon-save" ng-click="save()"></button>
-				<button type="button" class="btn btn-default glyphicon glyphicon-user" ng-click=""></button>
+				<button type="button" class="btn btn-default glyphicon glyphicon-user" ng-click="rightNav()"></button>
 				<button type="button" class="btn btn-default glyphicon glyphicon-share-alt" ng-click="linkMe()"></button>
 			</div>
 		</div>
-		<div id="editor" style="background: url(/static/img/white-loader.gif) no-repeat center;" ng-controller="EditorCtrl" ng-switch-when="2"></div>
+		<div id="editor" style="background: url(/static/img/white-loader.gif) no-repeat center; right: 200px;" ng-controller="EditorCtrl" ng-switch-when="2"></div>
+		<div id="userlist" style="position: absolute; top: 40px; right: 0px; bottom: 0px; width: 200px; background-color: #30363e; color: white;" ng-switch-when="2"></div>
 		<div class="sidebar-panel" id="empty-panel" style="background-color: #fff;" ng-switch-when="1">
 			<!-- The state is: SIDEBAR_STATE_EMPTY -->
 			<div id="empty-text-outer" style="margin-top: -150px;">

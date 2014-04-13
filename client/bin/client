@@ -99,7 +99,6 @@ var onData = function(data){
 var onCompleteData = function(data){
 	clearInterval(reconnect);
 	reconnect = null;
-	console.log('data');
 	var payload = JSON.parse(data);
 	if(payload.secret === clientSecret){
 		if(payload.command === 'testSuccess') return;
@@ -135,7 +134,6 @@ var onCompleteData = function(data){
 					for(var i=0; i<folders.length; i++){
 						files.push(folders[i]);
 					}
-					console.log('writing ls');
 					socket.write(JSON.stringify({type: 'ls', files: files}));
 					socket.write(END_STRING);
 				}

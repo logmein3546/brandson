@@ -1,5 +1,15 @@
+#title{
+	margin: 100px auto 0px auto;
+	height: 100px; 
+	width: 1250px;
+	text-align: center;
+	font-family: 'Roboto Slab', serif;
+	color: white;
+	font-size: 65px;
+}
+
 #logo{
-	margin: 200px auto 20px auto;
+	margin: 0px auto;
 	height: 500px; 
 	width: 500px;
 	background: url(/static/img/branson.png) no-repeat center center;
@@ -7,12 +17,13 @@
 }
 
 #message{
-	margin: 0px auto;
+	margin: 20px auto 0px auto;
 	height: 100px; 
-	width: 650px;
+	width: 800px;
 	text-align: center;
 	font-family: 'Roboto Slab', serif;
 	color: white;
+	font-size: 40px;
 }
 
 body{
