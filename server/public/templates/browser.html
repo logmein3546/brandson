@@ -3,7 +3,7 @@
 	<div class="header">
 		<h4 id="title">Navigator</h4>
 		<div id="buttons">
-			<button type="button" class="btn btn-default glyphicon glyphicon-refresh" ng-click="installerModal()"></button>
+			<button type="button" class="btn btn-default glyphicon glyphicon-refresh" ng-click="reloadNav()"></button>
 		</div>
 	</div>
 	<div id="sidebar" ng-switch on="state">
@@ -48,10 +48,10 @@
 			<div id="buttons">
 				<button type="button" class="btn btn-default glyphicon glyphicon-save" ng-click="save()"></button>
 				<button type="button" class="btn btn-default glyphicon glyphicon-user" ng-click=""></button>
-				<button type="button" class="btn btn-default glyphicon glyphicon-share-alt" ng-click=""></button>
+				<button type="button" class="btn btn-default glyphicon glyphicon-share-alt" ng-click="linkMe()"></button>
 			</div>
 		</div>
-		<div id="editor" ng-controller="EditorCtrl" ng-switch-when="2"></div>
+		<div id="editor" style="background: url(/static/img/white-loader.gif) no-repeat center;" ng-controller="EditorCtrl" ng-switch-when="2"></div>
 		<div class="sidebar-panel" id="empty-panel" style="background-color: #fff;" ng-switch-when="1">
 			<!-- The state is: SIDEBAR_STATE_EMPTY -->
 			<div id="empty-text-outer" style="margin-top: -150px;">

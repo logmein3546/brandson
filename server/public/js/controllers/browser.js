@@ -161,6 +161,23 @@ app.controller("BrowserSidebarCtrl", function($rootScope, $scope, $routeParams, 
 		LogSvc.e('Couldn\'t load the directories');
 		console.log(err);
 	});
+	
+	$scope.reloadNav = function() {
+		$scope.state = SIDEBAR_STATE_LOADING;
+		BrowserSvc.ls($routeParams.machineName, '/').success(function(nodes) {
+			for (var i = 0; i < nodes.length; i++) {
+				nodes[i].expandable = nodes[i].isDir;
+				nodes[i].path = '/' + nodes[i].name;
+			}
+			
+			$scope.nodes = nodes;
+			$scope.state = nodes.length ? SIDEBAR_STATE_NORMAL : SIDEBAR_STATE_EMPTY;
+		}).error(function(err) {
+			$scope.state = SIDEBAR_STATE_ERROR;
+			LogSvc.e('Couldn\'t load the directories');
+			console.log(err);
+		});
+	};
 });
 // Controller for the editor
 app.controller("EditorCtrl", function($routeParams, $scope, $rootScope) {
@@ -176,16 +193,45 @@ app.controller("BrowserContentCtrl", function($routeParams, $scope, $rootScope, 
 		return !!(name.match(/[^,/]*\.[^,/]+$/g));
 	};
 	
+	var map = {'.js': 'javascript', 
+	'.json': 'javascript', 
+	'.md': 'markdown', 
+	'.c': 'clike', 
+	'.cc': '.clike', 
+	'.css': 'css', 
+	'.cs': 'clike', 
+	'.cpp': 'clike', 
+	'html': 'htmlmixed'};
 	var modeOf = function(name) {
-		console.log(/\.[0-9a-z]+$/i.exec(name));
+		var results = /\.[0-9a-z]+$/i.exec(name);
+		if (results) {
+			if (map[results[0]]) return map[results[0]];
+			else return '';
+		}
 		return '';
 	}
+	
+	$scope.linkMe = function() {
+		window.prompt("Copy the file link to clipboard (Ctrl+C, Enter):", "http://thecodebutler.com/" + $routeParams.machineName + "/" + $scope.suchPath);
+	};
 	
 	$scope.state = STATE_LOADING;
 	$scope.suchPath = "";
 	// Do the initial load
 	if (isFile($routeParams.path || '/')) {
-		$scope.state = STATE_NORMAL;
+		$scope.state = STATE_LOADING;
+		$scope.suchPath = $routeParams.path;
+		setTimeout(function() {
+		BrowserSvc.file($routeParams.machineName, $routeParams.path).success(function(contents) {
+			setTimeout(function() {
+				doEditor($routeParams.path, contents);
+			}, 500);
+			$scope.state = STATE_NORMAL;
+		}).error(function(err) {
+			console.log('WAT', err);
+			$scope.state = STATE_DIR;
+		});
+		}, 250);
 	} else {
 		$scope.state = STATE_DIR;
 	}
@@ -194,7 +240,6 @@ app.controller("BrowserContentCtrl", function($routeParams, $scope, $rootScope, 
 		$scope.state = STATE_LOADING;
 		$scope.suchPath = args.path;
 		BrowserSvc.file($routeParams.machineName, args.path).success(function(contents) {
-			console.log(contents);
 			setTimeout(function() {
 				doEditor(args.path, contents);
 			}, 150);

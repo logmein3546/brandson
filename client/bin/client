@@ -101,15 +101,12 @@ var onCompleteData = function(data){
 	reconnect = null;
 	console.log('data');
 	var payload = JSON.parse(data);
-	console.log('payload: ', data);
 	if(payload.secret === clientSecret){
 		if(payload.command === 'testSuccess') return;
 		else if(payload.command === 'areyouthere'){
-			console.log('areyouthere');
 			socket.write(JSON.stringify({type: 'areyouthere', areyouthere: true})); 
 			socket.write(END_STRING);
 		}else if(payload.command === 'ls'){
-			console.log('ls');
 			fs.readdir(path.join(process.cwd(), payload.path), function(err, fileNames){
 				if(err){
 					console.log(err);
@@ -138,20 +135,18 @@ var onCompleteData = function(data){
 					for(var i=0; i<folders.length; i++){
 						files.push(folders[i]);
 					}
-					console.log(files);
+					console.log('writing ls');
 					socket.write(JSON.stringify({type: 'ls', files: files}));
 					socket.write(END_STRING);
 				}
 			});
 		}else if(payload.command === 'file'){
-			console.log('file');
 			fs.readFile(path.join(process.cwd(), payload.path), function(err, data){
 				if(err) socket.write(JSON.stringify({type: 'file', err: err}));
 				else socket.write(JSON.stringify({type: 'file', text: data.toString()}));
 				socket.write(END_STRING);
 			});
 		}else if(payload.command === 'save'){
-			console.log('save');
 			fs.writeFile(path.join(process.cwd(), payload.path), payload.text, function (err) {
 				if(err) socket.write(JSON.stringify({type: 'save', err: err}));
 				else socket.write(JSON.stringify({type: 'save', err: null}));

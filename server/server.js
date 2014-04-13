@@ -29,6 +29,7 @@ baseServer.configure(function(app){
 
 baseServer.register(function(app){
 	app.get('/ls', function(req, res) {
+		console.log('ls: ', req.param('path'));
 		if(req.param('path') && req.param('machineName')){
 			var socket = socketMap[req.param('machineName')];
 			if(!socket) res.send(500, 'device not connected: ' + req.param('machineName'));
@@ -51,6 +52,7 @@ baseServer.register(function(app){
 	});
 
 	app.get('/file', function(req, res){
+		console.log('file: ', req.param('path'));
 		if(req.param('path') && req.param('machineName')){
 			var socket = socketMap[req.param('machineName')];
 			if(!socket) res.send(500, 'device not connected: ' + req.param('machineName'));
@@ -123,6 +125,7 @@ var options = {
 var tlsServer = tls.createServer(options, function(socket) {
 	var body = '';
 	socket.on('data', function(data){
+		console.log(data.toString());
 		if(!data.toString().endsWith(END_STRING)){
 			body += data.toString()
 		}else{
@@ -133,7 +136,6 @@ var tlsServer = tls.createServer(options, function(socket) {
 	});
 	socket.on('completeData', function(data){
 		if(data.toString() === 'heartbeat'){
-			console.log('hb: ', data);
 			socket.write(JSON.stringify({command: 'testSuccess', secret: socket.bitbeamSecret}));
 			socket.write(END_STRING);
 		}else{
