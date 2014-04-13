@@ -1,4 +1,3 @@
-// Main Controller for the browser page as a whole
 app.controller("BrowserCtrl", function($scope, $window, LogSvc, BrowserSvc) {
 	/********* UI HELPERS *********/
 	// This code handles the drag resizing of the left navigation
@@ -170,12 +169,17 @@ app.controller("EditorCtrl", function($routeParams, $scope, $rootScope) {
 app.controller("BrowserContentCtrl", function($routeParams, $scope, $rootScope, BrowserSvc) {
 	var STATE_LOADING	= 0; // Means that the sidebar is loading
 	var STATE_DIR		= 1; // Means that there are no machines defined
-	var STATE_NORMAL	= 2; // Means that the accordion is visible
+	var STATE_NORMAL	= 2; // Means tha	t the accordion is visible
 	var STATE_ERROR	 	= 3; // Means that there was an issue loading
 	
 	var isFile = function (name) {
 		return !!(name.match(/[^,/]*\.[^,/]+$/g));
 	};
+	
+	var modeOf = function(name) {
+		console.log(/\.[0-9a-z]+$/i.exec(name));
+		return '';
+	}
 	
 	$scope.state = STATE_LOADING;
 	$scope.suchPath = "";
@@ -204,9 +208,9 @@ app.controller("BrowserContentCtrl", function($routeParams, $scope, $rootScope, 
 	$scope.save = function() {
 		if ($scope.suchPath && existingEditor && existingEditor.getText) {
 			BrowserSvc.save($routeParams.machineName, $scope.suchPath, existingEditor.getText()).success(function() {
-				console.log('SAVED BITCH.');
+				toastr.success("Your changes are most excellent.", "Save Successful");
 			}).error(function(err) {
-				console.log('Save failed: ', err);
+				toastr.success("There appears to be an issue with your connection..", "Save Unsuccessful");
 			});
 		}
 	};
@@ -247,7 +251,7 @@ app.controller("BrowserContentCtrl", function($routeParams, $scope, $rootScope, 
 		var childRef = firepadRef.child(escape($routeParams.machineName + '-' + path));
 		
 		//// Create CodeMirror (with lineWrapping on).
-		var codeMirror = CodeMirror(document.getElementById('editor'), { lineWrapping: true, lineNumbers: true });
+		var codeMirror = CodeMirror(document.getElementById('editor'), { lineWrapping: true, lineNumbers: true, mode: modeOf(path) });
 
 		//// Create Firepad (with rich text toolbar and shortcuts enabled).
 		var firepad = Firepad.fromCodeMirror(childRef, codeMirror);

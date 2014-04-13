@@ -1,0 +1,21 @@
+#logo{
+	margin: 200px auto 20px auto;
+	height: 500px; 
+	width: 500px;
+	background: url(/static/img/branson.png) no-repeat center center;
+	background-size: cover;
+}
+
+#message{
+	margin: 0px auto;
+	height: 100px; 
+	width: 650px;
+	text-align: center;
+}
+body{
+	height: 100vh;
+	background: -webkit-linear-gradient(#FF3019, #CF0404); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#FF3019, #CF0404); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#FF3019, #CF0404); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#FF3019, #CF0404); /* Standard syntax (must be last) */
+}

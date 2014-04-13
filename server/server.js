@@ -23,6 +23,7 @@ baseServer.configure(function(app){
 	app.use("/static/img", baseServer.express.static(__dirname + "/public/img"));
 	app.use("/static/templates", baseServer.express.static(__dirname + "/public/templates"));
 	app.use("/static/views", baseServer.express.static(__dirname + "/public/views"));
+	app.use("/static/pages", baseServer.express.static(__dirname + "/public/pages"));
 	app.set('views', __dirname + '/public/pages');
 });
 
@@ -101,14 +102,14 @@ baseServer.register(function(app){
 	app.get('/:session/*', function(req, res){
 		if(req.param('session')){
 			if(socketMap[req.param('session')]) res.sendfile('public/pages/index.html');
-			else res.send(401, 'invalid session key');
+			else res.sendfile('public/pages/error.html');
 		}else res.send(400, 'invalid parameters');
 	});
 	
 	app.get('/:session', function(req, res){
 		if(req.param('session')){
 			if(socketMap[req.param('session')]) res.sendfile('public/pages/index.html');
-			else res.send(401, 'invalid session key');
+			else res.sendfile('public/pages/error.html');
 		}else res.send(400, 'invalid parameters');
 	});
 });
