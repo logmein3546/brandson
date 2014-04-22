@@ -26,6 +26,7 @@
     "collaboration"
   ],
   "dependencies": {
+	"neverdrop": "*",
     "express": "*",
     "MD5": "*",
     "qs": "*",

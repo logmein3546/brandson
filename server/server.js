@@ -1,4 +1,4 @@
-var tls = require('tls');
+var neverdrop = require('neverdrop');
 var fs = require('fs');
 var exec = require('child_process').exec;
 var baseServer = require('./lib/server.js');
@@ -7,12 +7,7 @@ var storage = baseServer.storage;
 
 const SERVER_URL = 'thecodebutler.com';
 const TLS_PORT = 3546;
-const END_STRING = 'bitbeamEOT1337#420yoloswagumshollahollagetdolla';
 var socketMap = {};
-
-String.prototype.endsWith = function(suffix) {
-    return this.match(suffix+"$") == suffix;
-};
 
 baseServer.init(require('./config'));
 
@@ -45,8 +40,7 @@ baseServer.register(function(app){
 					res.send(500, 'error performing ls');
 				}
 				socket.once('error', onError);
-				socket.write(JSON.stringify({command: 'ls', path: req.param('path'), secret: socket.bitbeamSecret}));
-				socket.write(END_STRING);
+				socket.message(JSON.stringify({command: 'ls', path: req.param('path')}));
 			}
 		}else res.send(400, 'invalid parameters');
 	});
@@ -69,8 +63,7 @@ baseServer.register(function(app){
 					res.send(500, 'error performing file');
 				}
 				socket.once('error', onError);
-				socket.write(JSON.stringify({command: 'file', path: req.param('path'), secret: socket.bitbeamSecret}));
-				socket.write(END_STRING);
+				socket.message(JSON.stringify({command: 'file', path: req.param('path')}));
 			}
 		}else res.send(400, 'invalid parameters');
 	});
@@ -91,8 +84,7 @@ baseServer.register(function(app){
 					res.send(500, 'error performing save');
 				}
 				socket.once('error', onError);
-				socket.write(JSON.stringify({command: 'save', path: req.param('path'), text: req.param('text'), secret: socket.bitbeamSecret}));
-				socket.write(END_STRING);
+				socket.message(JSON.stringify({command: 'save', path: req.param('path'), text: req.param('text')}));
 			}
 		}else res.send(400, 'invalid parameters');
 	});
@@ -122,38 +114,23 @@ var options = {
 	rejectUnauthorized: false
 };
 
-var tlsServer = tls.createServer(options, function(socket) {
-	var body = '';
-	socket.on('data', function(data){
-		if(!data.toString().endsWith(END_STRING)){
-			body += data.toString()
-		}else{
-			body += data.toString().substring(0, data.toString().indexOf(END_STRING));
-			socket.emit('completeData', body);
-			body = '';
-		}
-	});
-	socket.on('completeData', function(data){
-		if(data.toString() === 'heartbeat'){
-			socket.write(JSON.stringify({command: 'testSuccess', secret: socket.bitbeamSecret}));
-			socket.write(END_STRING);
-		}else{
-			try{
-				var json = JSON.parse(data);
-				if(json.type === 'ls') socket.emit('ls', JSON.parse(data));
-				else if(json.type === 'file') socket.emit('file', JSON.parse(data));
-				else if(json.type === 'save') socket.emit('save', JSON.parse(data));
-				else if(json.type === 'connect') socket.emit('connect', JSON.parse(data));
-			}catch(e){
-				console.log('bad message from socket ' + socket.bitbeamKey);
-				console.log(e);
-				console.log(data);
-			}
+var tlsServer = neverdrop.createServer(options, function(socket) {
+	socket.on('message', function(data){
+		try{
+			var json = JSON.parse(data);
+			if(json.type === 'ls') socket.emit('ls', JSON.parse(data));
+			else if(json.type === 'file') socket.emit('file', JSON.parse(data));
+			else if(json.type === 'save') socket.emit('save', JSON.parse(data));
+			else if(json.type === 'connect') socket.emit('connect', JSON.parse(data));
+		}catch(e){
+			console.log('bad message from socket ' + socket.bitbeamKey);
+			console.log(e);
+			console.log(data);
 		}
 	});
 	socket.once('connect', function(payload){
+		console.log('connect:', payload);
 		socket.bitbeamKey = payload.key;
-		socket.bitbeamSecret = payload.secret;
 		socketMap[(payload.key)] = socket;
 	});
 	socket.setTimeout(1200000, function(){
