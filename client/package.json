@@ -1,7 +1,7 @@
 {
   "name": "branson",
   "preferGlobal": true,
-  "version": "0.3.2",
+  "version": "0.3.5",
   "author": "Tom Caputi <caputit1@tcnj.edu>",
   "description": "The code butler extrordinare will facilitate all your code collaboration needs. Would you like caviar with that?",
   "contributors": [ 
@@ -10,13 +10,7 @@
       "email": "me@sandile.io"
     } 
   ],
-  "bin": {
-    "branson": "bin/client"
-  },
-  "scripts": {
-    "start": "node bin/client"
-  },
-  "directories": "bin",
+  "bin": "./client.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/logmein3546/branson"
